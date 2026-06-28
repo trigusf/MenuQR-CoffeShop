@@ -34,3 +34,26 @@ export async function checkoutOrder(customerName, cart){
     return order
     
 }
+
+
+
+export async function getOrder() {
+    const { data, error } = await supabase.from("order").select("*");
+
+    if(error){
+        console.error(error)
+        return [];
+    }
+
+    return data;
+}
+
+export async function getDetailOrder() {
+    const { data, error } = await supabase.from("detail_order").select("*, menu(nama_menu)");
+
+    if (error) {
+        console.error(error)
+        return []
+    }
+    return data;
+}

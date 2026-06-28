@@ -17,7 +17,7 @@ function Cart() {
     async function handleCheckout() {
         try {
             console.log("Customer :", customerName);
-            console.log("Cart :", cart)
+            console.log("Cart :", cart);
             const order = await checkoutOrder(customerName, cart);
 
             console.log("sukses", order);
@@ -50,7 +50,7 @@ function Cart() {
     return (
         <div className="min-h-screen p-4">
 
-            <Link to="/" className="text-blue-500">
+            <Link to="/Menu" className="text-blue-500">
                 Kembali
             </Link>
 
