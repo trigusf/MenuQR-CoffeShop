@@ -38,10 +38,6 @@ function AdminDashboard() {
                 <Link to="/adminMenu">Menu</Link>
             </div>
 
-            <div>
-                Tambah Menu +
-            </div>
-
             <div className="grid grid-cols-4 gap-4">
             {order.map((order) => (
                 <div className="bg-white rounded-2xl p-5 shadow-sm h-full flex flex-col">

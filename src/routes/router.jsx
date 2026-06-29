@@ -4,6 +4,7 @@ import Menu from "../pages/customer/menu";
 import Cart from "../pages/customer/cart";
 import AdminDashboard from "../pages/admin/dashboard";
 import AdminMenu from "../pages/admin/menu";
+import addMenu from "../pages/admin/addMenu";
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
     {
         path: "/menu",
         element: <Menu />
+    },
+    {
+        path: "/addMenu",
+        element: <addMenu />
     }
 ]);
 
