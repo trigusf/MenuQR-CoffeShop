@@ -10,3 +10,14 @@ export async function getMenu() {
 
     return data;
 }
+
+export async function addMenu(isiMenu){
+    const { data, error } = await supabase.from("menu").insert(isiMenu)
+
+    if (error) {
+        console.error(error);
+        return [];
+    }
+
+    return data;
+}

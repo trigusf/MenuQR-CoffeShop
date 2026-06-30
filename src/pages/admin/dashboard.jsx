@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getDetailOrder, getOrder } from "../../services/orderServices";
+import { getDetailOrder, getOrder, updateStatus } from "../../services/orderServices";
 import { Link } from "react-router-dom";
 
 
@@ -24,6 +24,23 @@ function AdminDashboard() {
         }
         fetchOrder()
     }, [])
+
+    async function handleStatus(id_order) {
+        try{
+            await updateStatus(id_order);
+
+            const newData = await getOrder();
+
+            if(Array.isArray(newData)){
+                setOrder(newData);
+            }else{
+                setOrder(newData)
+            }
+
+        }catch (error){
+            console.error("gagal update status", error)
+        }
+    }
     
     return (
         <div className="min-h-screen p-4">
@@ -34,8 +51,10 @@ function AdminDashboard() {
                 </h1>
 
                 <Link to="/" className="text-blue-500 underline">Kelola pesanan pelanggan</Link> 
-                 <span> | </span> 
+                <span> | </span> 
                 <Link to="/adminMenu">Menu</Link>
+                <span> | </span> 
+                <Link to="">Info Pendapatan</Link>
             </div>
 
             <div className="grid grid-cols-4 gap-4">
@@ -77,8 +96,8 @@ function AdminDashboard() {
                             <span>Rp. {order.total.toLocaleString("ID-id")}</span>
                         </div>
 
-                        <button className="bg-black text-white px-4 py-2 mt-2 rounded-xl w-full items-end">
-                            Proses
+                        <button onClick={() => handleStatus(order.id_order)} className="bg-black text-white px-4 py-2 mt-2 rounded-xl w-full items-end">
+                            {order.status === "done" ? "Selesai" : order.status === "pending" ? "Proses" : "Selesaikan"}
                         </button>
 
                 </div>

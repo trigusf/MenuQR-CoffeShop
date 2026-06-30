@@ -57,3 +57,23 @@ export async function getDetailOrder() {
     }
     return data;
 }
+
+export async function updateStatus(id_order) {
+    const { data: currentOrder, error: error } = await supabase.from("order").select("status").eq("id_order", id_order).single();
+
+    if (error) {
+        console.log('gagal mengambil data')
+    }else{
+        let newStatus = null;
+
+        if(currentOrder.status === 'pending'){
+            newStatus = 'processing'
+        }else if(currentOrder.status === 'processing'){
+            newStatus = 'done'
+        }
+
+        if (newStatus) {
+            const { data, error } = await supabase.from("order").update({status: newStatus}).eq("id_order", id_order)
+        }
+    }
+}

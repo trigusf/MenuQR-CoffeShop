@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getMenu } from "../../services/menuServices";
+import { addMenu, getMenu } from "../../services/menuServices";
 import { Link } from "react-router-dom";
 
 
@@ -16,12 +16,40 @@ function AdminMenu() {
     }, [])
 
 
-    const [showModal, setShowModal] = useState(false);
+    const [showModalAddMenu, setShowModalAddMenu] = useState(false);
 
-    const [namaMenu, setNamaMenu] = useState([]);
-    const [harga, setHarga] = useState([]);
-    const [kategori, setKategori] = useState([]);
+    const [namaMenu, setNamaMenu] = useState("");
+    const [harga, setHarga] = useState("");
+    const [kategori, setKategori] = useState("");
 
+    async function handleMenu(){
+        try{
+            console.log("nama menu : ", namaMenu);
+            console.log("harga : ", harga);
+            console.log("kategori : ", kategori);
+
+            const isiMenu = {
+                nama_menu: namaMenu,
+                harga: harga,
+                kategori: kategori
+            }
+
+            const hasil = await addMenu(isiMenu);
+
+            console.log("berhasil", addMenu);
+
+            const menuUpdate = await getMenu();
+            setMenu(menuUpdate);
+            setNamaMenu("");
+            setHarga("");
+            setKategori("");
+            setShowModalAddMenu(false);
+
+        }catch (err){
+            console.error(err.message);
+            alert(err.message)
+        }
+    }
 
     
     return (
@@ -35,10 +63,12 @@ function AdminMenu() {
                 <Link to="/">Kelola pesanan pelanggan</Link> 
                 <span> | </span> 
                 <Link to="/AdminMenu" className="text-blue-500 underline">Menu</Link>
+                <span> | </span> 
+                <Link to="">Info Pendapatan</Link>
             </div>
 
             <div className="w-full flex justify-end">
-                <button onClick={() => setShowModal(true)} className="p-2 bg-blue-400 text-white py-2 rounded-xl my-2">
+                <button onClick={() => setShowModalAddMenu(true)} className="p-2 bg-blue-400 text-white py-2 rounded-xl my-2">
                     Tambah Menu +   
                 </button>
             </div>
@@ -64,8 +94,8 @@ function AdminMenu() {
                         Rp {menu.harga.toLocaleString("id-ID")}
                       </div>
                     
-                      <button onClick={() => addToCart(menu)} className="w-full mt-3 bg-black text-white py-2 rounded-xl">
-                        Add to Cart
+                      <button className="w-full mt-3 bg-black text-white py-2 rounded-xl">
+                        Edit Menu
                       </button>
                     </div>
                 </div>
@@ -76,7 +106,7 @@ function AdminMenu() {
 
 
 
-        {showModal && (
+        {showModalAddMenu && (
             <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
                 <div className="bg-white rounded-2xl w-full max-w-md p-6">
         
@@ -86,18 +116,18 @@ function AdminMenu() {
         
                         <div className="flex flex-col">
                             <label className="block mb-2 text-sm font-medium">Nama Menu</label>
-                            <input type="text" placeholder="Americano" className="w-full border rounded-xl p-3"/>
+                            <input type="text" placeholder="Masukan nama menu" value={namaMenu} onChange={(e) => setNamaMenu(e.target.value)} className="w-full border rounded-xl p-3"/>
                         </div>
         
                         <div>
                             <label className="block mb-2 text-sm font-medium">Harga</label>
-                            <input type="number" placeholder="25000" className="w-full border rounded-xl p-3"/>
+                            <input type="number" placeholder="Masukan harga menu" value={harga} onChange={(e) => setHarga(e.target.value)} className="w-full border rounded-xl p-3"/>
                         </div>
         
                         <div>
                             <label className="block mb-2 text-sm font-medium">Kategori</label>
-                            <select className="w-full border rounded-xl p-3">
-                                <option value="">Pilih kategori</option>
+                            <select className="w-full border rounded-xl p-3" value={kategori} onChange={(e) => setKategori(e.target.value)}>
+                                <option value="" disabled hidden>Pilih kategori</option>
                                 <option value="coffee">Coffee</option>
                                 <option value="non-coffee">Non Coffee</option>
                                 <option value="food">Food</option>
@@ -112,11 +142,11 @@ function AdminMenu() {
                     </div>
         
                     <div className="flex gap-3 mt-6">
-                        <button onClick={() => setShowModal(false)} className="flex-1 border py-3 rounded-xl">
+                        <button onClick={() => setShowModalAddMenu(false)} className="flex-1 border py-3 rounded-xl">
                             Batal
                         </button>
         
-                        <button className="flex-1 bg-black text-white py-3 rounded-xl">
+                        <button onClick={handleMenu} className="flex-1 bg-black text-white py-3 rounded-xl">
                             Simpan Menu
                         </button>
                     </div>

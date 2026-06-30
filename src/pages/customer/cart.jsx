@@ -96,13 +96,7 @@ function Cart() {
                                 <div className="flex justify-between items-center mt-4">
 
                                     <div className="flex items-center gap-3">
-                                        <button
-                                            onClick={() => {
-                                                decreaseQty(item.id_menu);
-                                                setCart(getCart());
-                                            }}
-                                            className="w-8 h-8 rounded-full bg-gray-200"
-                                        >
+                                        <button onClick={() => { decreaseQty(item.id_menu); setCart(getCart()); }} className="w-8 h-8 rounded-full bg-gray-200">
                                             -
                                         </button>
 
@@ -110,13 +104,7 @@ function Cart() {
                                             {item.quantity}
                                         </span>
 
-                                        <button
-                                            onClick={() => {
-                                                increaseQty(item.id_menu);
-                                                setCart(getCart());
-                                            }}
-                                            className="w-8 h-8 rounded-full bg-gray-200"
-                                        >
+                                        <button onClick={() => { increaseQty(item.id_menu); setCart(getCart()); }} className="w-8 h-8 rounded-full bg-gray-200">
                                             +
                                         </button>
                                     </div>
@@ -127,12 +115,7 @@ function Cart() {
                                             Rp {(item.harga * item.quantity).toLocaleString("id-ID")}
                                         </span>
 
-                                        <button
-                                            onClick={() => {
-                                                deleteItemCart(item.id_menu);
-                                                setCart(getCart());
-                                            }}
-                                        >
+                                        <button onClick={() => { deleteItemCart(item.id_menu); setCart(getCart()); }}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
                                         </button>
 
@@ -211,10 +194,7 @@ function Cart() {
 
                             <div className="max-h-40 overflow-y-auto space-y-2">
                                 {cart.map((item) => (
-                                    <div
-                                        key={item.id_menu}
-                                        className="flex justify-between text-sm"
-                                    >
+                                    <div key={item.id_menu} className="flex justify-between text-sm">
                                         <span>
                                             {item.quantity}x {item.nama_menu}
                                         </span>
@@ -229,18 +209,11 @@ function Cart() {
 
                         <div className="flex gap-3">
 
-                            <button
-                                onClick={() => setShowModal(false)}
-                                className="flex-1 border border-gray-300 py-3 rounded-xl"
-                            >
+                            <button onClick={() => setShowModal(false)} className="flex-1 border border-gray-300 py-3 rounded-xl">
                                 Batal
                             </button>
 
-                            <button
-                                onClick={handleCheckout}
-                                disabled={!customerName.trim()}
-                                className="flex-1 bg-black text-white py-3 rounded-xl disabled:bg-gray-400"
-                            >
+                            <button onClick={handleCheckout} disabled={!customerName.trim()} className="flex-1 bg-black text-white py-3 rounded-xl disabled:bg-gray-400">
                                 Pesan Sekarang
                             </button>
 
