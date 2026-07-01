@@ -62,7 +62,7 @@ function AdminMenu() {
 
                 <Link to="/">Kelola pesanan pelanggan</Link> 
                 <span> | </span> 
-                <Link to="/AdminMenu" className="text-blue-500 underline">Menu</Link>
+                <Link to="/admin-menu" className="text-blue-500 underline">Menu</Link>
                 <span> | </span> 
                 <Link to="">Info Pendapatan</Link>
             </div>
