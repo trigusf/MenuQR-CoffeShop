@@ -85,5 +85,3 @@ function AdminDashboard() {
 }
 
 export default AdminDashboard;
-
->>>>>>> 452d66069ff5bd5138eb742ceee0b8c4c579b978
