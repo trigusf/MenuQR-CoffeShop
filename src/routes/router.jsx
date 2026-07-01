@@ -6,6 +6,7 @@ import Login from "../pages/login";
 import Register from "../pages/register";
 import WelcomePage from "../pages/welcome";
 import AdminLogin from "../pages/admin/adminLogin";
+import AdminDashboard from "../pages/admin/dashboard";
 
 const router = createBrowserRouter([
     {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
     {
         path: "/admin-login",
         element: <AdminLogin />
+    },
+    {
+        path: "/admin-dashboard",
+        element: <AdminDashboard />
     },
     {
         path: "/menu",

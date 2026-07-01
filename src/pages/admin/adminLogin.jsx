@@ -68,7 +68,7 @@ function AdminLogin() {
       setMessage("Selamat datang, staf Cuan Coffee! Mengarahkan ke dashboard...");
 
       setTimeout(() => {
-        navigate("/menu");
+        navigate("/admin-dashboard");
       }, 800);
     } catch (exception) {
       setStatus("error");
